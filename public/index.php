@@ -14,8 +14,9 @@ ini_set('display_errors', 1);
 /*
  * Psr4AutoloaderClass starts
  */
-require_once '../config/loader.php';
+$loader = require __DIR__ . '/../vendor/autoload.php';
+//echo __DIR__;
+$loader->add('Config\\', __DIR__ . '/../');
 $router = new Config\Router();
 $router->execute();
-
 

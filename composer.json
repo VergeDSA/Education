@@ -1,0 +1,12 @@
+{
+    "name": "phpstudent/mvc_w_auth_autoloader",
+    "authors": [
+        {
+            "name": "VergeDSA",
+            "email": "firefly.ams@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"App\\": "app/"}
+    }
+}
