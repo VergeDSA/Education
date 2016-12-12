@@ -8,8 +8,7 @@
 
 namespace Config;
 
-
-class Session
+class SessionClass
 {
     public static function start()
     {
@@ -21,5 +20,4 @@ class Session
     {
         session_destroy();
     }
-
 }
