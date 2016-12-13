@@ -1,0 +1,439 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+* {
+    box-sizing: border-box;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+//////////////////////////////////////////////////////////
+
+
+
+img { border: 0; }
+
+#wrapper {
+    margin: 17px auto;
+    text-align: left;
+    width: 630px;
+    position: relative;
+}
+
+
+h1 {
+    margin: 0;
+    padding: 17px 0 5px 0;
+    line-height: 1;
+}
+
+.nav {
+    width: 129px;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+.nav h2 {
+    color: #fff;
+    margin-top: 0;
+    padding: 6px 0 6px 25px;
+    border-bottom: 1px solid #fff;
+    line-height: 1;
+}
+
+.nav ul {
+    margin: 0;
+    padding: 0 0 0 25px;
+    line-height: 1.4;
+}
+
+.nav li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul a {
+    color: white;
+    font-weight: bold;
+    word-wrap: break-word;
+}
+
+ul a:visited {
+    color: #fefefe;
+}
+
+ul a:hover, a:hover {
+    text-decoration: none;
+}
+
+#menu {
+    background: url(images/menu_bg.gif);
+
+}
+
+* html #menu {
+    background: white;
+}
+
+#header {
+    position: absolute;
+    background: #276196 url(images/header_bg.gif) repeat-x;
+    top: 0px;
+    left: 128px;
+    width: 502px;
+    height: 167px;
+}
+
+
+#header h2 img {
+	position: absolute;
+	z-index: 10;
+	left: 127px;
+	top: 58px;
+}
+
+#header a {
+    color: white;
+}
+
+#header ul {
+    margin: 0;
+    padding: 12px 0 0 0px;
+
+}
+
+#header li {
+    list-style: none;
+    line-height: 1.7;
+    float: left;
+}
+
+#header > li:last-child
+{
+    float:right;
+}
+
+#navtop {
+    position: absolute;
+    width: 480px;
+    top: 25px;
+    left: 5px;
+	z-index: 20;
+    display: flex;
+    justify-content: space-between;
+}
+
+#navtop a {
+    text-decoration: none;
+}
+
+#navtop a :last-child {
+    margin-left: auto;
+}
+
+#girl {
+    position: absolute;
+    background: url(images/header_girl.jpg) no-repeat;
+    top: 21px;
+    right: 0px;
+    width: 214px;
+    height: 146px;
+}
+
+#books {
+    position: absolute;
+    background: url(images/header_books.jpg) no-repeat;
+    top: 43px;
+    left: 0px;
+    width: 127px;
+    height: 124px;
+}
+
+#navblue {
+    margin: 0;
+    padding: 0;
+    width: 127px;
+    background: #bfdbfa;
+}
+
+#navblue li {
+    margin: 0 0 1px 0;
+    padding: 0 0 0 30px;
+    list-style: none;
+    line-height: 17px;
+    background: darkslategrey;
+//url(/images/blue_bg.gif);
+}
+
+* html #navblue li {
+    line-height: 28px;
+    padding: 0 0 0 16px;
+    padd\ing: 0 0 0 30px;
+}
+
+#navblue a {
+    text-decoration: none;
+    display: block;
+}
+
+#navblue a:hover {
+    text-decoration: underline;
+}
+
+* html #navblue a {
+    width: 100%;
+    width: 96px;
+}
+
+#searchbar {
+    background: url(images/olive_bg.gif);
+    position: absolute;
+    top: 172px;
+    left: 128px;
+	/*margin: 1px 0 0 128px;*/
+    width: 502px;
+    height: 1.9em;
+    color: #fff;
+    border-bottom: 2px solid white;
+}
+
+* html #searchbar {
+    height: 2.4em;
+}
+
+#searchbar form {
+    margin: 0;
+    padding: 5px 5px 5px 10px;
+}
+
+#searchbar .submit {
+    border: 1px solid #e6ead5;
+    background: #72765c;
+    font-size: 11px;
+    padding: 0 3px;
+    height: 19px;
+    color: #fff;
+}
+
+#searchbar .text {
+    border: 0px none;
+}
+
+#orangerow .col {
+    padding-top: 2.3em;
+}
+
+#greenrow .col {
+    float: left;
+    width: 487px;
+    margin-left: 6px;
+    margin-bottom: 5px;
+}
+
+.divider {
+    background: #1a508c;
+    margin: 1px 0;
+	height: 3px;
+    padding: 0;
+	/*background: url(/images/divider.jpg) repeat-x;
+	height: 5px;
+	width: 630px;*/
+}
+
+.col .divider2 {
+    background: none;
+    border-top: 1px solid #999;
+}
+
+#orangerow {
+    background: url(images/orange_bg.gif) repeat-y;
+	margin-top: 1px
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}
+
+#greenrow {
+    background: url(images/green_bg.gif) repeat-y;
+}
+
+.left {
+
+    float: left;
+    margin: 5px 5px 0 0;
+}
+
+.clear {
+    clear: both;
+    background: #fff;
+    margin: 0 1px 0 0;
+}
+
+.clear div {
+    margin: 0 4px 0 130px;
+    border-top: 1px solid #999;
+    height: 1px;
+    font-size: 1px;
+    margin-bottom: -1px;
+}
+
+* html .clear div {
+    margin-bottom: -2px;
+}
+
+#greenrow .clear {
+    height: 3px;
+    font-size: 1px;
+    margin-bottom: -2px;
+}
+
+#authormonth {
+    width: 500px;
+    float: left;
+    margin-top: 25px;
+    margin-left: 6px;
+    display: flex;
+    flex-direction: column;
+    //justify-content: space-between;
+    //align-items: baseline;
+    flex: 1;
+}
+#authormonth img{
+    display: inline-block;
+}
+
+#bookmonth {
+    width: 236px;
+    float: right;
+    margin-right: 10px;
+    display: inline;
+}
+
+.readmore {
+    text-align: right;
+    margin-top: -0.8em;
+}
+
+#footer {
+    text-align: right;
+    background: #828282;
+    color: #dbd1d1;
+}
+
+* html #footer {
+    height: 1%;
+}
+
+#footeri {
+    padding: 5px 3px 7px 13px;
+}
+
+#footer .copyright {
+    float: left;
+}
+
+#footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.books {
+    float: right;
+    width: 200px;
+    margin: 0 10px;
+}
+
+.col .books a {
+    color: maroon;
+}
+
+.col a {
+    color: #ed5411;
+}
+
+.flex-container {
+    padding: 0;
+    margin: 0 0 0 -10px;
+    width: 500px;
+    list-style: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+//    align-items:center;
+
+}
+
+.flex-item {
+    background: tomato;
+    padding: 0px;
+    margin: 10px 0 0 -10px;
+    width: 200px;
+    height: auto;
+    line-height: 25px;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+
+
+}
+
+.firstportrait {
+    float: left;
+    margin: 10px 10px 0 75px;
+}
+.secondportrait {
+    float: right;
+    margin: 10px 10px 0 325px;
+}
