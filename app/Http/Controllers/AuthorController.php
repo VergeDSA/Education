@@ -2,14 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\AuthorModel;
+//use App\AuthorModel;
+//use App\CategoryModel;
+use App\Http\ActiveRecord\AuthorsActiveRecord;
 use App\CategoryModel;
 
 class AuthorController
 {
     public function actionIndex()
     {
-        $author_index = AuthorModel::getAuthorsIndex();
+//        $author = new AuthorsActiveRecord();
+//        $author->id = 23;
+//        $author->name = 'Пол';
+//        $author->last_name = 'Мак-Федрис';
+//        $author->save();
+//        $author->save();
+//        $author_index = AuthorModel::getAuthorsIndex();
+        $author_index = AuthorsActiveRecord::fetchAll('ALL');
+        var_dump($author_index);
+        die;
         $category_index = CategoryModel::getCategoryIndex();
         $view = new View();
         $view->assign('items', $author_index);

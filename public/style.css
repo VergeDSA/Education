@@ -51,6 +51,10 @@ table {
     border-spacing: 0;
 }
 /*  End of CSS Reset              */
+/*
+* Original https://freewebsitetemplates.com/preview/booksonline/index.html
+*/
+
 .wrapper {
     display: flex;
     flex-flow: column nowrap;
@@ -166,14 +170,14 @@ table {
 .searchbar {
     background: url(images/olive_bg.gif);
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-around;
-    height: 1.9em;
+    height: auto;
     color: #fff;
     border-radius: 0 0 10px 10px;
 }
 .searchbar input {
-    margin-top: 4px;
+    margin: 2px 0 3px 0;
 }
 
 .flex-container {
