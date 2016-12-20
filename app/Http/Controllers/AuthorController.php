@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 //use App\AuthorModel;
 //use App\CategoryModel;
-use App\Http\ActiveRecord\AuthorsActiveRecord;
+use App\AuthorsActiveRecord;
 use App\CategoryModel;
 
 class AuthorController

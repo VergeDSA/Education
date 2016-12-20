@@ -20,15 +20,15 @@ class DbModel
         }
     }
 
-    private static function init()
+    public static function init()
     {
         self::$params = include(ROOT_FOLDER.'/config/db_settings.php');
         try {
-            self::$db = new \PDO(
+            return self::$db = new \PDO(
                 'mysql:host='.self::$params['HOST'].';dbname='.self::$params['DBNAME'],
                 self::$params['USER'],
                 self::$params['PASS'],
-                array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'')
+                include(ROOT_FOLDER.'/config/pdo_settings.php')
             );
         } catch (PDOException $e) {
             exit('Подключение не удалось:'. $e->getMessage());

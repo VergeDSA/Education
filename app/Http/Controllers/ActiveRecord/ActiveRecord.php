@@ -6,7 +6,7 @@
  * Time: 11:24
  */
 
-namespace App\Http\ActiveRecord;
+namespace App\Http\Controllers\ActiveRecord;
 
 class ActiveRecord
 {
@@ -24,13 +24,13 @@ class ActiveRecord
     private static function init()
     {
         static::$class_name = get_called_class();
-        self::$params = include(ROOT_FOLDER.'/config/db_settings.php');
+        self::$params = include(ROOT_FOLDER . '/config/db_settings.php');
 //        try {
             self::$db = new \PDO(
                 'mysql:host='.self::$params['HOST'].';dbname='.self::$params['DBNAME'],
                 self::$params['USER'],
                 self::$params['PASS'],
-                include(ROOT_FOLDER.'/config/pdo_settings.php')
+                include(ROOT_FOLDER . '/config/pdo_settings.php')
             );
 //        } catch (PDOException $e) {
 //            exit('Подключение не удалось:'. $e->getMessage());
@@ -80,7 +80,7 @@ class ActiveRecord
         return $result->fetchAll();
     }
 
-    protected function insert()
+    private function insert()
     {
         $query = 'INSERT INTO '. static::$table_name
             .' (' . implode(',', array_keys($this->data)) . ')'
@@ -88,7 +88,7 @@ class ActiveRecord
         return self::query($query, $this->data);
     }
 
-    protected function update()
+    private function update()
     {
         $query = 'UPDATE '. static::$table_name . ' SET ';
         foreach (array_keys($this->data) as $key) {
