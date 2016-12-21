@@ -8,7 +8,7 @@
 
 namespace App\Http\Controllers\DataMapper;
 
-class DataMapper
+class DataMapperMySQL
 {
     protected static $class_name = 'stdClass';
     private static $params = array();
@@ -19,7 +19,7 @@ class DataMapper
         self::$db = $db;
     }
 
-    protected static function queryMySQL(string $query, array $columns = [])
+    protected static function query(string $query, array $columns = [])
     {
         $ph_columns = [];
         if (!empty($columns)) {
@@ -32,48 +32,48 @@ class DataMapper
         return $result;
     }
 
-    public static function fetchAllMySQL($class, $deleted = 'ALL')
+    public static function fetchAll($obj, $deleted = 'ALL')
     {
 //        if (false === self::$db) {
 //            self::init();
 //        }
-        $query = 'SELECT * FROM '. $class::$table_name;
+        $query = 'SELECT * FROM '. $obj::$table_name;
         if ('DELETED' == $deleted) {
             $query .= ' WHERE deleted=1';
         } elseif ('ACTIVE' == $deleted) {
             $query .= ' WHERE deleted=0';
         }
-        $result = self::queryMySQL($query);
+        $result = self::query($query);
         return $result->fetchAll();
     }
 
-    public static function fetchOneMySQL($class, int $id, $deleted = 'ALL')
+    public static function fetchOne($obj, int $id, $deleted = 'ALL')
     {
 //        if (false === self::$db) {
 //            self::init();
 //        }
-        $query = 'SELECT * FROM '. $class::$table_name . ' WHERE id=:id';
+        $query = 'SELECT * FROM '. $obj::$table_name . ' WHERE id=:id';
         if ('DELETED' == $deleted) {
             $query .= ' AND deleted=1';
         } elseif ('ACTIVE' == $deleted) {
             $query .= ' AND deleted=0';
         }
-        $result = self::queryMySQL($query, ['id' => $id]);
+        $result = self::query($query, ['id' => $id]);
         return $result->fetchAll();
     }
 
-    private function insertMySQL($class)
+    private function insert($obj)
     {
-        $query = 'INSERT INTO '. $class::$table_name
-            .' (' . implode(',', array_keys($class->data)) . ')'
-         .' VALUES (:' . implode(',:', array_keys($class->data)) . ')';
-        return self::queryMySQL($query, $class->data);
+        $query = 'INSERT INTO '. $obj::$table_name
+            .' (' . implode(',', array_keys($obj->data)) . ')'
+         .' VALUES (:' . implode(',:', array_keys($obj->data)) . ')';
+        return self::query($query, $obj->data);
     }
 
-    private function updateMySQL($class)
+    private function update($obj)
     {
-        $query = 'UPDATE '. $class::$table_name . ' SET ';
-        foreach (array_keys($class->data) as $key) {
+        $query = 'UPDATE '. $obj::$table_name . ' SET ';
+        foreach (array_keys($obj->data) as $key) {
             if ('id'==$key) {
                 continue;
             }
@@ -81,32 +81,32 @@ class DataMapper
         }
         $query = substr($query, 0, -1);
         $query .= ' WHERE id=:id';
-        return self::queryMySQL($query, $class->data);
+        return self::query($query, $obj->data);
     }
 
-    public function saveMySQL($class)
+    public function save($obj)
     {
-        if (!isset($class->id)) {
-            $this->insertMySQL($class);
-            echo $class->id = self::$db->lastInsertId();
+        if (!isset($obj->id)) {
+            $this->insert($obj);
+            echo $obj->id = self::$db->lastInsertId();
         } else {
-            $this->updateMySQL($class);
+            $this->update($obj);
         }
     }
 
-    public function deleteMySQL($class)
+    public function delete($obj)
     {
-        $query = 'UPDATE '. $class::$table_name . ' SET ' .
+        $query = 'UPDATE '. $obj::$table_name . ' SET ' .
             'deleted=1';
         $query .= ' WHERE id=:id';
-        return self::queryMySQL($query, $class->data);
+        return self::query($query, $obj->data);
     }
 
-    public function unDeleteMySQL($class)
+    public function unDelete($obj)
     {
-        $query = 'UPDATE '. $class::$table_name . ' SET ' .
+        $query = 'UPDATE '. $obj::$table_name . ' SET ' .
             'deleted=0';
         $query .= ' WHERE id=:id';
-        return self::queryMySQL($query, $class->data);
+        return self::query($query, $obj->data);
     }
 }

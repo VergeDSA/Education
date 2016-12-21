@@ -50,32 +50,63 @@ class ActiveRecord
         return $result;
     }
 
-    public static function fetchAll($deleted = 'ALL')
+    public static function fetchAll($deleted = 'ALL', $joins = [])
     {
         if (false === self::$db) {
             self::init();
         }
         $query = 'SELECT * FROM '. static::$table_name;
+        $query_end = '';
         if ('DELETED' == $deleted) {
-            $query .= ' WHERE deleted=1';
+            $query_end .= ' WHERE '.static::$table_name.'.deleted=1';
         } elseif ('ACTIVE' == $deleted) {
-            $query .= ' WHERE deleted=0';
+            $query_end .= ' WHERE '.static::$table_name.'.deleted=0';
         }
+        if (!empty($joins)) {
+            foreach ($joins as $join_table => $join_params) {
+                list($join_method, $join_condition_left, $join_condition_right) = explode('/', $join_params);
+                    $query .= ' '. strtoupper($join_method) . ' JOIN ' . $join_table . ' ON ';
+                $query .= ' '. $join_condition_left . '=' . $join_condition_right;
+                if ('DELETED' == $deleted) {
+                    $query_end .= ' AND '.$join_table.'.deleted=1';
+                } elseif ('ACTIVE' == $deleted) {
+                    $query_end .= ' AND '.$join_table.'.deleted=0';
+                }
+            }
+        }
+        $query .= $query_end;
+//        echo $query;
         $result = self::query($query);
         return $result->fetchAll();
     }
 
-    public static function fetchOne(int $id, $deleted = 'ALL')
+    public static function fetchOne(int $id, $deleted = 'ALL', $joins = [])
     {
         if (false === self::$db) {
             self::init();
         }
-        $query = 'SELECT * FROM '. static::$table_name . ' WHERE id=:id';
+        $query = 'SELECT * FROM '. static::$table_name;
+        $query_end =  ' WHERE ' . static::$table_name . '.id=:id';
         if ('DELETED' == $deleted) {
-            $query .= ' AND deleted=1';
+            $query_end .= ' AND deleted=1';
         } elseif ('ACTIVE' == $deleted) {
-            $query .= ' AND deleted=0';
+            $query_end .= ' AND deleted=0';
         }
+        if (!empty($joins)) {
+            foreach ($joins as $join_table => $join_params) {
+                list($join_method, $join_condition_left, $join_condition_right) = explode('/', $join_params);
+                $query .= ' '. strtoupper($join_method) . ' JOIN ' . $join_table . ' ON ';
+                $query .= ' '. $join_condition_left .'=' . $join_condition_right;
+                if ('DELETED' == $deleted) {
+                    $query_end .= ' AND '.$join_table.'.deleted=1';
+                } elseif ('ACTIVE' == $deleted) {
+                    $query_end .= ' AND '.$join_table.'.deleted=0';
+                }
+            }
+        }
+        $query .= $query_end;
+//        echo $query;
+//        die;
         $result = self::query($query, ['id' => $id]);
         return $result->fetchAll();
     }

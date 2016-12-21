@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\BookModel;
 use App\DbModel;
 use App\BooksDataMapper;
-use App\Http\Controllers\DataMapper\DataMapper;
+use App\Http\Controllers\DataMapper\DataMapperMySQL;
+use App\CategoriesActiveRecord;
 use App\CategoryModel;
 
 class BookController
@@ -13,19 +14,21 @@ class BookController
     public function actionIndex()
     {
 
-//        $book_index = BookModel::getBooksIndex();
+// old       $book_index = BookModel::getBooksIndex();
         $book = new BooksDataMapper();
-//        $book->title = 'Использование JavaScript';
-//        $book->number_of_pages = 896;
-//        $book->year = 2002;
-//        $books = new DataMapper(DbModel::init());
-//        $books->saveMySQL($book);
-        $books_index = $books::fetchAllMySQL($book);
-        var_dump($books_index);
-        die;
-        $category_index = CategoryModel::getCategoryIndex();
+//        $book->id = 7;
+//        $book->title = 'Modern PHP. New Features and Good Practices';
+//        $book->number_of_pages = 268;
+//        $book->year = 2015;
+        $books = new DataMapperMySQL(DbModel::init());
+//        $books->save($book);
+        $books_index = $books::fetchAll($book);
+//        var_dump($books_index);
+//        die;
+// old        $category_index = CategoryModel::getCategoryIndex();
+        $category_index = CategoriesActiveRecord::fetchAll('ALL');
         $view = new View();
-        $view->assign('items', $book_index);
+        $view->assign('items', $books_index);
         $view->assign('categories', $category_index);
         $view->display('books.php');
 //        print_r($book_index);

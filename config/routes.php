@@ -10,5 +10,6 @@ return array(
     'authors' => 'author/index',
     'books' => 'book/index',
     'readers' => 'reader/index',
-    'categories' => 'category/index'
+    'categories' => 'category/index',
+    '' => 'author/index'
 );
