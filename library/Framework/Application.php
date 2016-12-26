@@ -6,7 +6,7 @@
  * Time: 1:56
  */
 
-namespace App\Controllers;
+namespace Library\Framework;
 
 class Application
 {
@@ -24,7 +24,7 @@ class Application
         } elseif ('cgi' == substr($this->sapi, 0, 3)) {
             echo 'Запуск в режиме CGI';
         } elseif ('apache' == substr($this->sapi, 0, 6)) {
-            $router = new \App\Config\Router();
+            $router = new Router();
             $path_finder = $router->execute();
             $controller_name = $path_finder['controller_name'];
             $method_name = $path_finder['method_name'];

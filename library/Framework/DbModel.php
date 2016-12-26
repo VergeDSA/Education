@@ -6,7 +6,7 @@
  * Time: 16:18
  */
 
-namespace App\Models;
+namespace Library\Framework;
 
 class DbModel
 {

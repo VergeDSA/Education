@@ -19,7 +19,7 @@ ini_set('session.gc_maxlifetime', 10);
 
 $loader = require ROOT_FOLDER.'/vendor/autoload.php';
 //$loader->add('config\\', __DIR__ . '/../');
-$app = new App\Controllers\Application();
+$app = new Library\Framework\Application();
 $app->run();
 //ob_start();
 //print_r($_COOKIE);

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Library\ActiveRecord\ActiveRecord;
 use Library\DataMapper\DataMapperMySQL;
 use Library\Traits;
 
@@ -15,10 +16,10 @@ use Library\Traits;
  * @property $updated_at
  */
 
-class Books
+class Books extends ActiveRecord
 {
     use Traits\MagicSet, Traits\MagicGet, Traits\MagicIsSet;
-    use Traits\GetTableProperties;
+    use Traits\GetTableProperties, Traits\SetTableProperties;
     public static $table_name = 'books';
     protected static $table_fields = ['id','title','number_of_pages','year'];
     public $data = [];

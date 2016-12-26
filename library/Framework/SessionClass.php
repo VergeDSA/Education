@@ -6,7 +6,7 @@
  * Time: 12:24
  */
 
-namespace Config;
+namespace Library\Framework;
 
 class SessionClass
 {

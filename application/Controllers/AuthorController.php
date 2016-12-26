@@ -38,12 +38,15 @@ class AuthorController
             $joins = ['AuthorsBooks'=>'left/authors.id/author_id',
                       'Books'=>'left/books.id/book_id'
                      ];
+            Models\Authors::pushTableFields('created_at');
+            Models\AuthorsBooks::pushTableFields('created_at');
+            Models\Books::pushTableFields('created_at');
             $author = Models\Authors::fetchOne($id, 'ALL', $joins);
             $joins = ['Authors'=>'inner/authors.id/author_id',
                       'Books'=>'inner/books.id/book_id'
                      ];
             $books = Models\AuthorsBooks::fetchAll('ALL', $joins);
-            var_dump($books);
+            var_dump($author);
             die;
             $category_index = Models\Categories::fetchAll('ALL');
             $view = new View();

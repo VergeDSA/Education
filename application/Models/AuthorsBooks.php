@@ -18,7 +18,7 @@ use Library\Traits;
 class AuthorsBooks extends ActiveRecord
 {
     use Traits\MagicSet, Traits\MagicGet, Traits\MagicIsSet;
-    use Traits\GetTableProperties;
+    use Traits\GetTableProperties, Traits\SetTableProperties;
     protected static $table_name = 'authors_books';
     protected static $table_fields = ['id','author_id','book_id'];
     protected $data = [];

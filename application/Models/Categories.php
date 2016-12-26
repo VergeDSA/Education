@@ -18,7 +18,7 @@ use Library\Traits;
 class Categories extends ActiveRecord
 {
     use Traits\MagicSet, Traits\MagicGet, Traits\MagicIsSet;
-    use Traits\GetTableProperties;
+    use Traits\GetTableProperties, Traits\SetTableProperties;
     protected static $table_name = 'categories';
     protected static $table_fields = ['id','title'];
     protected $data = [];

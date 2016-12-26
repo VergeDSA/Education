@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\DbModel;
+use Library\Framework\DbModel;
 use App\Models\Books;
 use Library\DataMapper\DataMapperMySQL;
 use App\Models\Categories;

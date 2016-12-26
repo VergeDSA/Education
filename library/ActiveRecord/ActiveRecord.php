@@ -61,6 +61,8 @@ class ActiveRecord
         }
         $query = self::buildQuery($stn = static::$table_name, $stf = static::$table_fields, $deleted, $joins);
         $query['query_start'] .= ' FROM ' . $stn;
+        echo implode('', $query);
+        die;
         $result = self::query(implode('', $query));
         return $result->fetchAll();
     }
@@ -73,6 +75,8 @@ class ActiveRecord
         $query = self::buildQuery($stn = static::$table_name, $stf = static::$table_fields, $deleted, $joins);
         $query['query_start'] .= ' FROM ' . $stn;
         $query['query_end'] = ' WHERE ' . $stn . '.id=:id'.$query['query_end'];
+        echo implode('', $query);
+        die;
         $result = self::query(implode('', $query), ['id' => $id]);
         return $result->fetchAll();
     }
@@ -93,7 +97,10 @@ class ActiveRecord
                 $join_class = '\App\Models\\' . $join_obj;
                 $join_table = $join_class::getTableName();
                 $join_fields = $join_class::getTableFields();
+//                var_dump($join_fields);
+//                die;
                 $query .= ',' . $join_table . '.' . implode(',' . $join_table . '.', $join_fields);
+                $query .= ' as ' . $join_table . '.*';
                 list($join_method, $join_condition_left, $join_condition_right) = explode('/', $join_params);
                 $query_middle .= ' ' . strtoupper($join_method) . ' JOIN ' . $join_table . ' ON';
                 $query_middle .= ' ' . $join_condition_left . '=' . $join_condition_right;
