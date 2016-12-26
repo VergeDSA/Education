@@ -12,15 +12,15 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ob_start();
-ini_set('session.save_path',__DIR__.'/../sess');
+define('ROOT_FOLDER', __DIR__ . '/..');
+ini_set('session.save_path', ROOT_FOLDER . '/data/sessions');
 ini_set('session.gc_probability', 100);
 ini_set('session.gc_maxlifetime', 10);
-define('ROOT_FOLDER',__DIR__ . '/..');
+
 $loader = require ROOT_FOLDER.'/vendor/autoload.php';
 //$loader->add('config\\', __DIR__ . '/../');
-$router = new Config\Router();
-$router->execute();
-
+$app = new App\Controllers\Application();
+$app->run();
 //ob_start();
 //print_r($_COOKIE);
 //echo session_save_path();
@@ -29,5 +29,3 @@ $router->execute();
 //Config\SessionClass::start();
 //echo $ob_output;
 //die;
-
-
