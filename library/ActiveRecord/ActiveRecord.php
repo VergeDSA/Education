@@ -8,36 +8,18 @@
 
 namespace Library\ActiveRecord;
 
-use \App\Models;
+use Library\Framework\Db;
 
 class ActiveRecord
 {
     protected static $class_name = 'stdClass';
     protected static $table_fields = ['*'];
-    private static $params = array();
-    private static $db = false;
+//    private static $params = array();
+//    private static $db = false;
 
     public function __construct()
     {
-        if (false === self::$db) {
-            self::init();
-        }
-    }
-
-    private static function init()
-    {
         static::$class_name = get_called_class();
-        self::$params = include(ROOT_FOLDER . '/application/Config/db_settings.php');
-//        try {
-        self::$db = new \PDO(
-            'mysql:host=' . self::$params['HOST'] . ';dbname=' . self::$params['DBNAME'],
-            self::$params['USER'],
-            self::$params['PASS'],
-            include(ROOT_FOLDER . '/application/Config/pdo_settings.php')
-        );
-//        } catch (PDOException $e) {
-//            exit('Подключение не удалось:'. $e->getMessage());
-//        }
     }
 
     protected static function query(string $query, array $columns = [])
@@ -49,16 +31,13 @@ class ActiveRecord
             }
         }
 //        echo $query; die;
-        $result = self::$db->prepare($query);
+        $result = Db::getDbConnection()->prepare($query);
         $result->execute($ph_columns);
         return $result;
     }
 
     public static function fetchAll($deleted = 'ALL', $joins = [])
     {
-        if (false === self::$db) {
-            self::init();
-        }
         $query = self::buildQuery($stn = static::$table_name, $stf = static::$table_fields, $deleted, $joins);
         $query['query_start'] .= ' FROM ' . $stn;
 //        echo implode('', $query);
@@ -69,12 +48,10 @@ class ActiveRecord
 
     public static function fetchOne(int $id, $deleted = 'ALL', $joins = [])
     {
-        if (false === self::$db) {
-            self::init();
-        }
         $query = self::buildQuery($stn = static::$table_name, $stf = static::$table_fields, $deleted, $joins);
         $query['query_start'] .= ' FROM ' . $stn;
         $query['query_end'] = ' WHERE ' . $stn . '.id=:id'.$query['query_end'];
+//        echo implode('', $query); die;
         $result = self::query(implode('', $query), ['id' => $id]);
         return $result->fetchAll();
     }
@@ -143,7 +120,7 @@ class ActiveRecord
     {
         if (!isset($this->id)) {
             $this->insert();
-            echo $this->id = self::$db->lastInsertId();
+            echo $this->id = Db::getDbConnection()->lastInsertId();
         } else {
             $this->update();
         }
