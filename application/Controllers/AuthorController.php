@@ -5,7 +5,7 @@ namespace App\Controllers;
 //use App\AuthorModel;
 //use App\CategoryModel;
 use App\Models;
-use App\CategoryModel;
+use Library\Framework;
 
 class AuthorController
 {
@@ -23,7 +23,7 @@ class AuthorController
 //        die;
 // old        $category_index = CategoryModel::getCategoryIndex();
         $category_index = Models\Categories::fetchAll('ALL');
-        $view = new View();
+        $view = new Framework\View();
         $view->assign('items', $author_index);
         $view->assign('categories', $category_index);
         $view->display('authors.php');
@@ -49,7 +49,7 @@ class AuthorController
             var_dump($author);
             die;
             $category_index = Models\Categories::fetchAll('ALL');
-            $view = new View();
+            $view = new Framework\View();
             $view->assign('items', $author);
             $view->assign('categories', $category_index);
             $view->display('authors.php');

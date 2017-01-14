@@ -35,9 +35,7 @@ class Db
     {
         if (false !== self::$db) {
             return self::$db;
-        }
-        else
-        {
+        } else {
             self::init();
             return self::$db;
         }

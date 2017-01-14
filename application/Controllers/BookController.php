@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use Library\Framework\Db;
+use Library\Framework;
 use App\Models\Books;
-use Library\DataMapper\DataMapperMySQL;
 use App\Models\Categories;
+use Library\DataMapper\DataMapperMySQL;
 
 class BookController
 {
@@ -18,14 +18,14 @@ class BookController
 //        $book->title = 'Modern PHP. New Features and Good Practices';
 //        $book->number_of_pages = 268;
 //        $book->year = 2015;
-        $books = new DataMapperMySQL(Db::getDbConnection());
+        $books = new DataMapperMySQL(Framework\Db::getDbConnection());
 //        $books->save($book);
         $books_index = $books::fetchAll($book);
 //        var_dump($books_index);
 //        die;
 // old        $category_index = CategoryModel::getCategoryIndex();
         $category_index = Categories::fetchAll('ALL');
-        $view = new View();
+        $view = new Framework\View();
         $view->assign('items', $books_index);
         $view->assign('categories', $category_index);
         $view->display('books.php');
@@ -52,7 +52,7 @@ class BookController
 //            var_dump($book);
 //            die;
             $category_index = Categories::fetchAll('ALL');
-            $view = new View();
+            $view = new Framework\View();
             $view->assign('items', $book);
             $view->assign('categories', $category_index);
             $view->display('book.php');

@@ -26,15 +26,13 @@ class Application
         } elseif ('apache' == substr($this->sapi, 0, 6)) {
             $router = new Router();
             $path_finder = $router->execute();
-            $controller_name = $path_finder['controller_name'];
-            $method_name = $path_finder['method_name'];
-            $parse_path = $path_finder['params_array'];
-            if (count($parse_path)>0) {
-                $class = new $controller_name();
-                call_user_func_array(array($class, $method_name), $parse_path);
+
+            if (count($path_finder['params_array'])>0) {
+                $class = new $path_finder['controller_name']();
+                call_user_func_array(array($class, $path_finder['method_name']), $path_finder['params_array']);
             } else {
-                $class = new $controller_name();
-                $class->$method_name();
+                $class = new $path_finder['controller_name']();
+                $class->{$path_finder['method_name']}();
             }
         } else {
             echo 'Запуск в режиме модуля сервера '.$this->sapi;

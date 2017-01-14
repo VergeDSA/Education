@@ -6,7 +6,7 @@
  * Time: 2:02
  */
 
-namespace App\Controllers;
+namespace Library\Framework;
 
 class View
 {
